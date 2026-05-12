@@ -24,42 +24,32 @@ if (cmd === 'stations') {
   // write your code here
 }
 
-
-  else if (cmd === 'line') {
-  const lineName = args[1];
-
-  if (!lineName) {
-    console.log('Please provide a line name.');
-    console.log('Example: node monorail.js line NAC');
-    process.exit(1);
-  }
-
-  const stations = getStationsByLine(lineName);
-
-  if (stations.length === 0) {
-    console.log('No stations found for line: ' + lineName);
-    process.exit(1);
-  }
-
-  console.log(lineName + ' line - ' + stations.length + ' stations:');
-  console.log('');
-
-  for (let i = 0; i < stations.length; i++) {
-    const station = stations[i];
-    console.log('  ' + station.name + ' | Zone: ' + station.zone);
-  }
+// TODO 2 - 'line' command
+else if (cmd === 'line') {
 }
 
-// TODO 2 - 'fare' command
-// args[1] is the fromName, args[2] is the toName
-// If either is missing, print an error and exit
-// Call calculateFare(fromName, toName)
-// If result.error exists, print it and exit
-// Otherwise print from, to, line, and fare
 else if (cmd === 'fare') {
   const fromName = args[1];
   const toName = args[2];
-  // write your code here
+
+  if (!fromName || !toName) {
+    console.log('Please provide both station names.');
+    console.log('Example: node monorail.js fare Heliopolis "NAC Central"');
+    process.exit(1);
+  }
+
+  const result = calculateFare(fromName, toName);
+
+  if (result.error) {
+    console.log('Error: ' + result.error);
+    process.exit(1);
+  }
+
+  console.log('Fare estimate:');
+  console.log('  From : ' + result.from);
+  console.log('  To   : ' + result.to);
+  console.log('  Line : ' + result.line);
+  console.log('  Fare : ' + result.fare + ' ' + result.currency);
 }
 
 else {
