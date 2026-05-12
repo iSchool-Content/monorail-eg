@@ -50,7 +50,7 @@ if (cmd === 'stations') {
   }
 }
 
-// TODO 3 - 'fare' command
+// TODO 2 - 'fare' command
 // args[1] is the fromName, args[2] is the toName
 // If either is missing, print an error and exit
 // Call calculateFare(fromName, toName)
