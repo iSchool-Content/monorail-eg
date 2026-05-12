@@ -22,18 +22,50 @@ function getStationsByLine(lineName) {
   return result;
 }
 
-// TODO 2 - calculateFare
-// Use getAllStations() to get all stations
-// Find the station where station.name === fromName  (call it fromStation)
-// Find the station where station.name === toName    (call it toStation)
-// If either is not found, return { error: 'Station not found' }
-// If they are on different lines, return { error: 'These stations are on different lines' }
-// Fare rule: BASE_FARE = 5, PER_ZONE = 3
-// zoneDiff = difference between zones (always positive)
-// fare = BASE_FARE + zoneDiff * PER_ZONE
-// Return: { from, to, line, fare, currency: 'EGP' }
 function calculateFare(fromName, toName) {
-  // write your code here
+  const stations = getAllStations();
+
+  let fromStation = null;
+  let toStation = null;
+
+  for (let i = 0; i < stations.length; i++) {
+    if (stations[i].name === fromName) {
+      fromStation = stations[i];
+    }
+    if (stations[i].name === toName) {
+      toStation = stations[i];
+    }
+  }
+
+  if (fromStation === null) {
+    return { error: 'Station "' + fromName + '" not found' };
+  }
+
+  if (toStation === null) {
+    return { error: 'Station "' + toName + '" not found' };
+  }
+
+  if (fromStation.line !== toStation.line) {
+    return { error: 'These stations are on different lines' };
+  }
+
+  const BASE_FARE = 5;
+  const PER_ZONE = 3;
+
+  let zoneDiff = fromStation.zone - toStation.zone;
+  if (zoneDiff < 0) {
+    zoneDiff = zoneDiff * -1;
+  }
+
+  const fare = BASE_FARE + zoneDiff * PER_ZONE;
+
+  return {
+    from: fromStation.name,
+    to: toStation.name,
+    line: fromStation.line,
+    fare: fare,
+    currency: 'EGP'
+  };
 }
 
 module.exports = { getAllStations, getStationsByLine, calculateFare };
