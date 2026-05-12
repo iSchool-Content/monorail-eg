@@ -1,12 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 
-// TODO 1 - getAllStations
-// Read the file at data/stations.json using fs.readFileSync
-// Parse it with JSON.parse and return the array
-// Hint: use path.join(__dirname, 'data', 'stations.json') for the file path
+// Load all stations from the JSON file
 function getAllStations() {
-  // write your code here
+  const filePath = path.join(__dirname, 'data', 'stations.json');
+  const fileContent = fs.readFileSync(filePath, 'utf8');
+  const stations = JSON.parse(fileContent);
+  return stations;
 }
 
 function getStationsByLine(lineName) {
