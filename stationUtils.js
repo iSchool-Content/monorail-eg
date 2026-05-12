@@ -1,25 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 
-// Load all stations from the JSON file
+// TODO1: Load all stations from the JSON file
 function getAllStations() {
-  const filePath = path.join(__dirname, 'data', 'stations.json');
-  const fileContent = fs.readFileSync(filePath, 'utf8');
-  const stations = JSON.parse(fileContent);
-  return stations;
+  
 }
 
+// TODO2: Load all stations from the JSON file
 function getStationsByLine(lineName) {
-  const stations = getAllStations();
-  const result = [];
 
-  for (let i = 0; i < stations.length; i++) {
-    if (stations[i].line === lineName) {
-      result.push(stations[i]);
-    }
-  }
-
-  return result;
 }
 
 function calculateFare(fromName, toName) {
