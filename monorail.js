@@ -24,15 +24,30 @@ if (cmd === 'stations') {
   // write your code here
 }
 
-// TODO 2 - 'line' command
-// args[1] is the line name the user typed (e.g. "NAC")
-// If args[1] is missing, print an error message and exit
-// Call getStationsByLine(lineName) to get matching stations
-// If no stations found, print a message and exit
-// Otherwise loop through and print each station
-else if (cmd === 'line') {
+
+  else if (cmd === 'line') {
   const lineName = args[1];
-  // write your code here
+
+  if (!lineName) {
+    console.log('Please provide a line name.');
+    console.log('Example: node monorail.js line NAC');
+    process.exit(1);
+  }
+
+  const stations = getStationsByLine(lineName);
+
+  if (stations.length === 0) {
+    console.log('No stations found for line: ' + lineName);
+    process.exit(1);
+  }
+
+  console.log(lineName + ' line - ' + stations.length + ' stations:');
+  console.log('');
+
+  for (let i = 0; i < stations.length; i++) {
+    const station = stations[i];
+    console.log('  ' + station.name + ' | Zone: ' + station.zone);
+  }
 }
 
 // TODO 3 - 'fare' command
