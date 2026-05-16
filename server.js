@@ -1,6 +1,6 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const { getAllStations } = require("./stationUtils");
+import express from 'express';
+import dotenv from 'dotenv';
+import { getAllStations } from './stationUtils.js';
 
 dotenv.config();
 
