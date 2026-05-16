@@ -1,8 +1,5 @@
 const { getAllStations, getStationsByLine, calculateFare } = require('./stationUtils');
 
-// process.argv holds everything the user typed in the terminal
-// slice(2) removes the first two items (node path + file path)
-// so args only contains what the user actually typed
 const args = process.argv.slice(2);
 const cmd = args[0];
 
