@@ -19,10 +19,38 @@ if (!cmd) {
 // Loop through them and print each station's name, line, and zone
 if (cmd === 'stations') {
   // write your code here
+  const stations = getAllStations();
+  console.log('All stations (' + stations.length + ' total):');
+  console.log('');
+
+  for (const station of stations) {
+    console.log('  ' + station.name + ' | Line: ' + station.line + ' | Zone: ' + station.zone);
+  }
 }
 
 // TODO 2 - 'line' command
 else if (cmd === 'line') {
+  const lineName = args[1];
+
+  if (!lineName) {
+    console.log('Please provide a line name.');
+    console.log('Example: node monorail.js line NAC');
+    process.exit(1);
+  }
+
+  const stations = getStationsByLine(lineName);
+
+  if (stations.length === 0) {
+    console.log('No stations found for line: ' + lineName);
+    process.exit(1);
+  }
+
+  console.log(lineName + ' line - ' + stations.length + ' stations:');
+  console.log('');
+
+  for (const station of stations) {
+    console.log('  ' + station.name + ' | Zone: ' + station.zone);
+  }
 }
 
 else if (cmd === 'fare') {
