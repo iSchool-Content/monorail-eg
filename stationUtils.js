@@ -5,13 +5,23 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // TODO1: Load all stations from the JSON file
-function getAllStations() {
-  
+export function getAllStations() {
+  const fileContent = readFileSync(join(__dirname, 'data', 'stations.json'), 'utf8');
+  return JSON.parse(fileContent);
 }
 
 // TODO2: Load all stations from the JSON file
-function getStationsByLine(lineName) {
+export function getStationsByLine(lineName) {
+  const stations = getAllStations();
+  const result = [];
 
+  for (const station of stations) {
+    if (station.line.toLowerCase() === lineName.toLowerCase()) {
+      result.push(station);
+    }
+  }
+
+  return result;
 }
 
 
@@ -56,4 +66,3 @@ export function calculateFare(fromName, toName) {
   };
 }
 
-module.exports = { getAllStations, getStationsByLine, calculateFare };
