@@ -14,6 +14,12 @@ app.use(express.json());
 // Inside it, print req.method and req.url
 // Then call next() so Express moves to the next step
 // Register it with app.use(logger) before the routes
+function logger(req, res, next) {
+  console.log(`${req.method} ${req.url}`);
+  next();
+}
+app.use(logger);
+
 
 // GET /stations - return all stations
 app.get("/stations", (req, res) => {
